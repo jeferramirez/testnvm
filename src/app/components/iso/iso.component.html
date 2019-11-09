@@ -1,0 +1,180 @@
+<div class="container">
+
+  <mat-tab-group>
+    <mat-tab label="Ejercicio 1 ISO ">
+      <div class="row">
+
+        <div class="col-md-6" style="margin-top: 50px;">
+
+          <form class="example-form" #form="ngForm">
+            <mat-form-field class="example-full-width">
+              <input matInput #iso="ngModel" placeholder="Ingrese un codigo ISO" [(ngModel)]="codigo" name="iso"
+                pattern="[a-z]{1,3}" required minlength="2">
+              <mat-error *ngIf="iso.hasError('required')">Campo obligatorio</mat-error>
+              <mat-error *ngIf="iso.hasError('pattern')">El código debe contener solo 3 letras</mat-error>
+              <mat-error *ngIf="iso.hasError('minlength')">El código debe contener minimo 2 caracteres</mat-error>
+
+            </mat-form-field>
+
+            <div class="text-center" style="margin-top: 15px;">
+              <button [disabled]="form.invalid" (click)="searchIso()" mat-raised-button color="primary">Buscar</button>
+            </div>
+          </form>
+        </div>
+
+
+
+
+
+
+        <div class="col-md-12" *ngIf="pais === null" style="margin-top: 35px;">
+          <h4 class="text-center"> el código no existe o está mal escrito</h4>
+        </div>
+
+        <div class="col-md-12" *ngIf="pais">
+
+          <mat-card class="example-card text-center" style="margin-top: 35px;">
+            <mat-card-header>
+              <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + pais.flag + ')'}"
+                class="example-header-image">
+              </div>
+              <mat-card-title>{{pais.name}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="codigo alfa 2" [value]="pais.alpha2Code">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="código alfa 3" [value]="pais.alpha3Code">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="área" [value]="pais.area">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="población" [value]="pais.population">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="capital" [value]="pais.capital">
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="subregion" [value]="pais.subregion">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="region" [value]="pais.region">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="coeficiente gini" [value]="pais.gini">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="limites" [value]="pais.borders.join(' - ')">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-12">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="ortografía alternativa" [value]="pais.altSpellings.join(' - ')">
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="código llamada" [value]="pais.callingCodes">
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="zonas horarias" [value]="pais.timezones">
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="código numerico" [value]="pais.numericCode">
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="código numerico" [value]="pais.numericCode">
+                  </mat-form-field>
+                </div>
+              </div>
+              <hr>
+              <h5>Lenguajes</h5>
+
+              <div class="row" *ngFor="let item of pais.languages">
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="iso639_1" [value]="item.iso639_1">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <input matInput placeholder="nativeName" [value]="item.nativeName">
+                  </mat-form-field>
+                </div>
+                <br>
+              </div>
+
+            </mat-card-content>
+            <mat-card-actions>
+
+            </mat-card-actions>
+          </mat-card>
+        </div>
+
+      </div>
+
+    </mat-tab>
+    <mat-tab label="Ejercicio 2 Algoritmo">
+      <div class="row">
+        <div class="  col-md-12 text-center" style="margin-top: 15px;">
+          <button (click)=" iniciarCiclo()" mat-raised-button color="primary">Generar cadenas</button>
+          <h3 style="margin-top: 15px;" class="text-center"> {{stringinicial}} </h3>
+
+          <br>
+          <p *ngFor="let item of ciclos;let i = index"> GENERACION: {{i}} - {{item.cadena}} - PUNTAJE: {{item.puntaje}}
+          </p>
+        </div>
+      </div>
+    </mat-tab>
+
+  </mat-tab-group>
+
+
+
+</div>
